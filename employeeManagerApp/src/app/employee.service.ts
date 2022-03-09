@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Employee } from "./employee";
 import { environment } from "src/environments/environment";
@@ -16,7 +16,9 @@ export  class EmployeeService {
 
     public getEmployees(): Observable<Employee[]>
     {
-        return this.http.get<Employee[]>(`${this.apiServiceUrl}/employees/all`)
+        const myHeaders = new HttpHeaders({'myHeader' : 'headerValue'})
+        const myparams = new HttpParams({fromString:'sasi'});
+        return this.http.get<Employee[]>(`${this.apiServiceUrl}/employees/all`,{reportProgress:true});
     }
 
     public addEmployee(employee :Employee ): Observable<Employee>
